@@ -25,9 +25,7 @@ export default function App() {
         <Button title='ADD' onPress={ handleAdd }/>
       </View>
       <FlatList data={ todoList } renderItem={ itemData => (
-          <View style={ styles.todoList }>
-            <Text> { itemData.item.value } </Text>
-          </View>
+
       )}/>
     </View>
   );
