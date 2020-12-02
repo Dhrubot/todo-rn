@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
+import TodoTask from './components/TodoTask'
+
 
 export default function App() {
   const [todoTask, setTodoTask] = useState('')
@@ -15,17 +17,9 @@ export default function App() {
 
   return (
     <View style={styles.mainContainer}>
-      <View style={styles.inputContainer} >
-        <TextInput
-          placeholder='Things TO DO'
-          style={styles.inputArea}
-          onChangeText={ handleInput }
-          value={ todoTask } 
-        />
-        <Button title='ADD' onPress={ handleAdd }/>
-      </View>
-      <FlatList data={ todoList } renderItem={ itemData => (
 
+      <FlatList data={ todoList } renderItem={ itemData => (
+        <TodoTask todo={ itemData.item.value }/>
       )}/>
     </View>
   );
@@ -36,23 +30,4 @@ const styles = StyleSheet.create({
   mainContainer: {
     padding: 50
   },
-  inputContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  inputArea: {
-    width: '80%',
-    borderColor: 'black',
-    borderWidth: 1,
-    padding: 10
-  },
-  todoList: {
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1
-  }
-  
 });
