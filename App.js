@@ -8,14 +8,20 @@ export default function App() {
   const [todoList, setTodoList] = useState([])
 
   const handleAddingTask = task => {
-    setTodoList([...todoList, { key: Math.random().toString(), value: task }])
+    setTodoList( todoList => [...todoList, { key: Math.random().toString(), value: task }])
+  }
+
+  const handleRemoveTask = taskId => {
+    setTodoList( todoList => {
+      return todoList.filter(task => task.key !== taskId)
+    })
   }
 
   return (
     <View style={styles.mainContainer}>
       <TodoInput onAddTask={ handleAddingTask }/>
       <FlatList data={ todoList } renderItem={ itemData => (
-        <TodoTask todo={ itemData.item.value }/>
+        <TodoTask id={ itemData.item.key } todo={ itemData.item.value } onDelete={ handleRemoveTask } />
       )}/>
     </View>
   );
