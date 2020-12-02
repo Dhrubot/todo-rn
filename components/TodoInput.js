@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 
-const TodoInput = props => {
+const TodoInput = (props) => {
+  const [todoTask, setTodoTask] = useState("");
+
+  const handleInput = enteredText => {
+    setTodoTask(enteredText)
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         placeholder="Things TO DO"
-        style={styles.inputArea}
-        onChangeText={handleInput}
+        style={ styles.inputArea }
+        onChangeText={ handleInput }
         value={todoTask}
       />
-      <Button title="ADD" onPress={ handleAdd } />
+      <Button title="ADD" onPress={ props.onAddTask.bind(this, todoTask) } />
     </View>
   );
 };
