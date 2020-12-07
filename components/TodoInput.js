@@ -1,30 +1,38 @@
 import React, { useState } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal } from "react-native";
 
 const TodoInput = (props) => {
   const [todoTask, setTodoTask] = useState("");
 
-  const handleInput = enteredText => {
-    setTodoTask(enteredText)
+  const handleInput = (enteredText) => {
+    setTodoTask(enteredText);
+  };
+
+  const addTaskHandler = () => {
+    props.onAddTask(todoTask)
+    setTodoTask('')
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        placeholder="Things TO DO"
-        style={ styles.inputArea }
-        onChangeText={ handleInput }
-        value={todoTask}
-      />
-      <Button title="ADD" onPress={ props.onAddTask.bind(this, todoTask) } />
-    </View>
+    <Modal visible={ props.visible } animationType='slide' >
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Things TO DO"
+          style={styles.inputArea}
+          onChangeText={handleInput}
+          value={todoTask}
+        />
+        <Button title="Add" onPress={addTaskHandler} />
+        <Button title="Cancel" onPress={addTaskHandler} />
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
   inputArea: {
@@ -32,6 +40,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     padding: 10,
+    marginBottom: 10
   },
 });
 
