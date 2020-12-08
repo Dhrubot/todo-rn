@@ -19,10 +19,14 @@ export default function App() {
     })
   }
 
+  const cancelAddingTaskHandler = () => {
+    setModalState(false)
+  }
+
   return (
     <View style={styles.mainContainer}>
       <Button title='Add New ToDo' onPress={() => setModalState(true)} />
-      <TodoInput onAddTask={ handleAddingTask } visible={ modalState } />
+      <TodoInput onAddTask={ handleAddingTask } visible={ modalState } onCancel={ cancelAddingTaskHandler } />
       <FlatList data={ todoList } renderItem={ itemData => (
         <TodoTask id={ itemData.item.key } todo={ itemData.item.value } onDelete={ handleRemoveTask } />
       )}/>

@@ -22,8 +22,14 @@ const TodoInput = (props) => {
           onChangeText={handleInput}
           value={todoTask}
         />
-        <Button title="Add" onPress={addTaskHandler} />
-        <Button title="Cancel" onPress={addTaskHandler} />
+        <View style={ styles.buttonContainer} >
+          <View style={ styles.button }>
+            <Button title="ADD" onPress={addTaskHandler} />
+          </View>
+          <View style={ styles.button }>
+            <Button title="CANCEL" color='red' onPress={ props.onCancel } />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -42,6 +48,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '60%'
+  },
+  button: {
+    width: '40%'
+  }
 });
 
 export default TodoInput;
